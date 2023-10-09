@@ -1,0 +1,76 @@
+﻿<UserControl
+    x:Class="ProductsDemo.Views.CustomersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:ProductsDemo.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:productsDemo="clr-namespace:ProductsDemo"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:viewModels="clr-namespace:ProductsDemo.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewModels:CustomersViewModel,
+                                     IsDesignTimeCreatable=True}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    DataContext="{productsDemo:DependencyInjectionSource Type=viewModels:CustomersViewModel}"
+    mc:Ignorable="d">
+
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:WindowedDocumentUIService WindowStartupLocation="CenterOwner" WindowType="{x:Type syncfusion:ChromelessWindow}">
+            <dxmvvm:WindowedDocumentUIService.WindowStyle>
+                <Style TargetType="syncfusion:ChromelessWindow">
+                    <Setter Property="Width" Value="500" />
+                    <Setter Property="Height" Value="300" />
+                    <Setter Property="ResizeMode" Value="NoResize" />
+                    <Setter Property="syncfusion:SfSkinManager.Theme" Value="{syncfusion:SkinManagerExtension ThemeName=Windows11Light}" />
+                </Style>
+            </dxmvvm:WindowedDocumentUIService.WindowStyle>
+        </dxmvvm:WindowedDocumentUIService>
+    </dxmvvm:Interaction.Behaviors>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <syncfusion:SfBusyIndicator Grid.Row="0" IsBusy="{Binding IsLoading}">
+            <syncfusion:SfDataGrid
+                x:Name="grid"
+                AllowGrouping="False"
+                AutoGenerateColumns="False"
+                BorderThickness="0"
+                ItemsSource="{Binding Customers}"
+                SelectedItem="{Binding SelectedCustomer, Mode=OneWay}"
+                SelectionMode="Single"
+                SelectionUnit="Row">
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn HeaderText="Contact Name" MappingName="ContactName" />
+                    <syncfusion:GridTextColumn HeaderText="City" MappingName="City" />
+                </syncfusion:SfDataGrid.Columns>
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand
+                        Command="{Binding OpenCustomerCommand}"
+                        CommandParameter="{Binding ElementName=grid, Path=CurrentItem}"
+                        EventName="CellDoubleTapped" />
+                </dxmvvm:Interaction.Behaviors>
+            </syncfusion:SfDataGrid>
+        </syncfusion:SfBusyIndicator>
+
+        <Border
+            Grid.Row="1"
+            Margin="0,4,0,0"
+            Background="LightGray"
+            CornerRadius="4">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button
+                    Margin="1"
+                    Padding="50,8"
+                    Command="{Binding LoadCommand}"
+                    Content="Load"
+                    IsEnabled="{Binding IsLoading, Converter={dxmvvm:BooleanNegationConverter}}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
