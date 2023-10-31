@@ -15,12 +15,8 @@ public class MainWindowViewModel
         NavigationService = navigationService;
     }
     
-    public virtual string Rats { get; set; } = "maiuuu";
-
     public INavigationService NavigationService { get; }
 
-    public void Navigate(string target)
-    {
-        NavigationService?.Navigate(target, null, this);
-    }
+    public void Navigate(string target) 
+        => NavigationService.Navigate(target, null, this);
 }

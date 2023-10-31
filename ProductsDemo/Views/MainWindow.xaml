@@ -1,7 +1,15 @@
 ﻿<syncfusion:ChromelessWindow
+    DataContext="{productsDemo:DependencyInjectionSource Type=viewModels:MainWindowViewModel}"
+    Height="768"
+    Title="Products Demo"
+    Width="1024"
+    WindowStartupLocation="CenterScreen"
+    d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d"
+    syncfusion:SfSkinManager.VisualStyle="Windows11Light"
     x:Class="ProductsDemo.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:ProductsDemo.Views"
@@ -9,15 +17,13 @@
     xmlns:productsDemo="clr-namespace:ProductsDemo"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:viewModels="clr-namespace:ProductsDemo.ViewModels"
-    Title="Products Demo"
-    Width="1024"
-    Height="768"
-    d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel,
-                                     IsDesignTimeCreatable=True}"
-    syncfusion:SfSkinManager.VisualStyle="Windows11Light"
-    DataContext="{productsDemo:DependencyInjectionSource Type=viewModels:MainWindowViewModel}"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:EventToCommand
+            Command="{Binding NavigateCommand}"
+            CommandParameter="CustomersView"
+            EventName="Loaded" />
+    </dxmvvm:Interaction.Behaviors>
 
     <syncfusion:SfNavigationDrawer ContentView="{Binding NavigationService.Current, UpdateSourceTrigger=PropertyChanged}" DisplayMode="Expanded">
         <syncfusion:NavigationItem
