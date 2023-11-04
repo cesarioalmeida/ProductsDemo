@@ -1,0 +1,75 @@
+﻿<UserControl
+    DataContext="{productsDemo:DependencyInjectionSource Type=viewModels:TreeViewModel}"
+    d:DataContext="{d:DesignInstance Type=viewModels:TreeViewModel,
+                                     IsDesignTimeCreatable=True}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d"
+    x:Class="ProductsDemo.Views.TreeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:productsDemo="clr-namespace:ProductsDemo"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:viewModels="clr-namespace:ProductsDemo.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:WindowedDocumentUIService
+            DocumentShowMode="Dialog"
+            WindowStartupLocation="CenterOwner"
+            WindowType="{x:Type syncfusion:ChromelessWindow}">
+            <dxmvvm:WindowedDocumentUIService.WindowStyle>
+                <Style BasedOn="{StaticResource SyncfusionChromelessWindowStyle}" TargetType="syncfusion:ChromelessWindow">
+                    <Setter Property="Width" Value="500" />
+                    <Setter Property="Height" Value="300" />
+                    <Setter Property="ResizeMode" Value="NoResize" />
+                    <Setter Property="syncfusion:SfSkinManager.Theme" Value="{syncfusion:SkinManagerExtension ThemeName=Windows11Light}" />
+                    <Style.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="/Syncfusion.Themes.Windows11Light.WPF;component/chromelesswindow/chromelesswindow.xaml" />
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </Style.Resources>
+                </Style>
+            </dxmvvm:WindowedDocumentUIService.WindowStyle>
+        </dxmvvm:WindowedDocumentUIService>
+    </dxmvvm:Interaction.Behaviors>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock
+            FontSize="20"
+            Foreground="Blue"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Text="Tree View"
+            VerticalAlignment="Center" />
+        <syncfusion:SfTreeView
+            AutoExpandMode="AllNodes"
+            BorderThickness="1"
+            ChildPropertyName="Children"
+            ExpandActionTrigger="Node"
+            FocusVisualStyle="{x:Null}"
+            FullRowSelect="True"
+            Grid.Row="1"
+            IsAnimationEnabled="True"
+            ItemsSource="{Binding Nodes}">
+            <syncfusion:SfTreeView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}" VerticalAlignment="Center" />
+                </DataTemplate>
+            </syncfusion:SfTreeView.ItemTemplate>
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand
+                    Command="{Binding OpenNodeCommand}"
+                    CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type syncfusion:SfTreeView}}}"
+                    EventName="MouseDoubleClick" />
+            </dxmvvm:Interaction.Behaviors>
+        </syncfusion:SfTreeView>
+    </Grid>
+</UserControl>

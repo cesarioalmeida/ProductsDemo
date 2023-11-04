@@ -5,9 +5,11 @@ using DevExpress.Mvvm.POCO;
 using Microsoft.Extensions.DependencyInjection;
 using ProductsDemo.Core.Services;
 using ProductsDemo.Core.UI;
+using ProductsDemo.Models;
 using ProductsDemo.Services;
 using ProductsDemo.ViewModels;
 using ProductsDemo.Views;
+using ProductsDemo.Views.TreeNodes;
 
 namespace ProductsDemo;
 
@@ -28,6 +30,20 @@ public class ProductDemoBootstrapper : Bootstrapper
 
         serviceCollection.AddScoped<CustomersView>();
         serviceCollection.AddScoped<ProductsView>();
+        
+        serviceCollection.AddScoped<TreeView>();
+        serviceCollection.AddScopedViewModel<TreeViewModel>();
+        
+        serviceCollection.AddScoped<PortfolioView>();
+        serviceCollection.AddScoped<ITreeNode, PortfolioView>();
+        serviceCollection.AddScoped<NettingPoolView>();
+        serviceCollection.AddScoped<ITreeNode, NettingPoolView>();
+        serviceCollection.AddScoped<ParentNodeView>();
+        serviceCollection.AddScoped<ITreeNode, ParentNodeView>();
+        serviceCollection.AddScoped<ChildNodeView>();
+        serviceCollection.AddScoped<ITreeNode, ChildNodeView>();
+        serviceCollection.AddScoped<ChildNodeOtherParentView>();
+        serviceCollection.AddScoped<ITreeNode, ChildNodeOtherParentView>();
 
         serviceCollection.AddSingleton<MainWindow>();
         

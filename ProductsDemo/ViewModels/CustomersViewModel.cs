@@ -30,7 +30,8 @@ public class CustomersViewModel
 
     public virtual bool IsLoading { get; set; }
 
-    protected IDocumentManagerService DocumentManagerService => this.GetService<IDocumentManagerService>();
+    [ServiceProperty(SearchMode=ServiceSearchMode.PreferParents)]
+    protected virtual IDocumentManagerService DocumentManagerService { get; } = null!;
 
     [UsedImplicitly]
     public async Task Load()

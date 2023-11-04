@@ -15,11 +15,10 @@
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:viewModels="clr-namespace:ProductsDemo.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
     <dxmvvm:Interaction.Behaviors>
         <dxmvvm:WindowedDocumentUIService WindowStartupLocation="CenterOwner" WindowType="{x:Type syncfusion:ChromelessWindow}">
             <dxmvvm:WindowedDocumentUIService.WindowStyle>
-                <Style TargetType="syncfusion:ChromelessWindow">
+                <Style BasedOn="{StaticResource SyncfusionChromelessWindowStyle}" TargetType="syncfusion:ChromelessWindow">
                     <Setter Property="Width" Value="500" />
                     <Setter Property="Height" Value="300" />
                     <Setter Property="ResizeMode" Value="NoResize" />
@@ -27,7 +26,7 @@
                     <Style.Resources>
                         <ResourceDictionary>
                             <ResourceDictionary.MergedDictionaries>
-                                <ResourceDictionary Source="/Syncfusion.SfGrid.WPF;component/Styles/Styles.xaml" />
+                                <ResourceDictionary Source="/Syncfusion.Themes.Windows11Light.WPF;component/chromelesswindow/chromelesswindow.xaml" />
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary>
                     </Style.Resources>

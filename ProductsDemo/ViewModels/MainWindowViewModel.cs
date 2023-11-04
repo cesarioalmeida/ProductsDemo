@@ -16,7 +16,7 @@ public class MainWindowViewModel
     }
     
     public INavigationService NavigationService { get; }
-
+    
     public void Navigate(string target) 
         => NavigationService.Navigate(target, null, this);
 }

@@ -25,6 +25,7 @@
             EventName="Loaded" />
     </dxmvvm:Interaction.Behaviors>
 
+
     <syncfusion:SfNavigationDrawer ContentView="{Binding NavigationService.Current, UpdateSourceTrigger=PropertyChanged}" DisplayMode="Expanded">
         <syncfusion:NavigationItem
             Command="{Binding NavigateCommand}"
@@ -36,6 +37,10 @@
             Command="{Binding NavigateCommand}"
             CommandParameter="ProductsView"
             Header="Products" />
+        <syncfusion:NavigationItem
+            Command="{Binding NavigateCommand}"
+            CommandParameter="TreeView"
+            Header="Tree" />
     </syncfusion:SfNavigationDrawer>
 
 </syncfusion:ChromelessWindow>
