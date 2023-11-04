@@ -11,6 +11,7 @@
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:productsDemo="clr-namespace:ProductsDemo"
+    xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:viewModels="clr-namespace:ProductsDemo.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -23,6 +24,13 @@
                     <Setter Property="Height" Value="300" />
                     <Setter Property="ResizeMode" Value="NoResize" />
                     <Setter Property="syncfusion:SfSkinManager.Theme" Value="{syncfusion:SkinManagerExtension ThemeName=Windows11Light}" />
+                    <Style.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="/Syncfusion.SfGrid.WPF;component/Styles/Styles.xaml" />
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </Style.Resources>
                 </Style>
             </dxmvvm:WindowedDocumentUIService.WindowStyle>
         </dxmvvm:WindowedDocumentUIService>

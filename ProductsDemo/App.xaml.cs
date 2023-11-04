@@ -7,7 +7,7 @@ namespace ProductsDemo
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
+            
             var bootstrapper = new ProductDemoBootstrapper(this, "Products Demo");
             bootstrapper.Run();
         }
